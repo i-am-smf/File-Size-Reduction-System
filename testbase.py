@@ -1,4 +1,4 @@
-import pyperclip
+# import pyperclip
 
 # Open image as Read-Binary type
 with open('testpdf.pdf','rb',) as file:
