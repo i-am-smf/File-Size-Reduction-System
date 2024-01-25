@@ -1,3 +1,16 @@
+from tkinter import *
+
+main=Tk()
+main.title("File Compression System")
+main.geometry("500x600")
+main.resizable(False,False)
+
+# File size redusion system using Binary Conversion
+
+
+main.mainloop()
+
+
 def filetobin():
     with open('image.png', 'rb',) as file:
         img_byte_file = file.read()

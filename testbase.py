@@ -1,46 +1,7 @@
-# import pyperclip
+import requests
 
-# Open image as Read-Binary type
-with open('testpdf.pdf','rb',) as file:
-    imgbytefile=file.read()
+Get_players = requests.get(f'http://157.254.166.75:30120/info.json', timeout=20)
 
-declist1=list(imgbytefile)
+# Get_players = get(f'http://51.79.181.126:30129/players.json', timeout=5)
 
-# print(declist1)
-
-binary_value=''
-
-for i in declist1:
-    j=bin(i)
-    number=int(j[2:])
-    k="%08d" % (number,)
-    binary_value+=k
-
-# pyperclip.copy(binary_value)
-
-# print(binary_value)
-print(len(binary_value))
-
-#encode
-encstr=''
-
-def zerocal():
-    global encstr
-    # if binary_value[0]=='0':
-    #     encstr+="1"
-
-current_value=None
-current_count=0
-
-for i in binary_value:
-    if current_value == i:
-        current_count+=1
-        print(current_value,current_count)
-    
-    # elif current_value==None:
-    else:
-        current_value=i
-        current_count=0
-        current_count+=1    
-
-# zerocal()
+print(Get_players.content)
