@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog,simpledialog
 from PIL import Image
 import sys
+import numpy
 
 main=Tk()
 main.title("File Size Reduction System")
@@ -67,12 +68,20 @@ class FileProcess:
         with open('close.jpg', 'wb') as f4:
             f4.write(imgbyte2)
 
+
 fp=FileProcess()
 data=fp.filetobin()
 
-print(len(data))
-sys.set_int_max_str_digits(965208)
+print(data)
+# sys.set_int_max_str_digits(len(data))
+# intdata=int(data)
 
-data=int(data)/99
+print(data.split("1"))
+with open("data.txt",'w') as f:
+    f.write(f"{data.split('1')}")
+    f.close()
 
-print(len(data))
+with open("data1.txt",'w') as f:
+    f.write(data)
+    f.close()
+

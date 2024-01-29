@@ -1,30 +1,32 @@
-import kivy
-import random
+from cryptography.fernet import Fernet
 
-from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
+class SecureChat:
+    def __init__(self, key):
+        self.key = key
+        self.cipher_suite = Fernet(key)
 
-red = [1,0,0,1]
-green = [0,1,0,1]
-blue =  [0,0,1,1]
-purple = [1,0,1,1]
+    def encrypt_message(self, message:str):
+        encrypted_message = self.cipher_suite.encrypt(message.encode())
+        return encrypted_message
 
-class HBoxLayoutExample(App):
-    def build(self):
-        layout = BoxLayout(padding=10)
-        colors = [red, green, blue, purple]
+    def decrypt_message(self, encrypted_message):
+        decrypted_message = self.cipher_suite.decrypt(encrypted_message).decode()
+        return decrypted_message
 
-        for i in range(5):
-            btn = Button(text="Button #%s" % (i+1),
-                         background_color=random.choice(colors)
-                         )
-
-            layout.add_widget(btn)
-            btn.on_press()
-
-        return layout
-
+# Example usage
 if __name__ == "__main__":
-    app = HBoxLayoutExample()
-    app.run()
+    # Simulate key exchange (in a real-world scenario, this would involve secure key distribution)
+    key = Fernet.generate_key()
+
+    alice_chat = SecureChat(key)
+    bob_chat = SecureChat(key)
+
+    # Alice sends a message
+    alice_message = "Hello, Bob! This is a secure message."
+    encrypted_message = alice_chat.encrypt_message(alice_message)
+    print(encrypted_message)
+    # Bob receives and decrypts the message
+    decrypted_message = bob_chat.decrypt_message(encrypted_message)
+
+    print(f"Alice: {alice_message}")
+    print(f"Bob (Decrypted): {decrypted_message}")
