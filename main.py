@@ -1,11 +1,16 @@
 from tkinter import *
 from tkinter import filedialog,simpledialog
+from PIL import Image
+import sys
+
 main=Tk()
 main.title("File Size Reduction System")
 main.geometry("500x600")
 main.resizable(False,False)
 
-Label(main,text="Welcome to \nFile Size Reduction System",font=("Arial Bold",20),justify=CENTER).place(relx=0.14,rely=0.1)
+iconImage = PhotoImage(file="image.gif",format="gif")
+
+Label(main,text="Welcome to \nFile Size Reduction System",font=("Arial Bold",20),justify=CENTER,image=iconImage).place(relx=0.14,rely=0.1)
 
 
 def reduce_size():
@@ -13,13 +18,13 @@ def reduce_size():
     print(file)
 
 def increase_size():
-    file=filedialog.asksaveasfile(confirmoverwrite=True,filetypes=[".py",".exe"])
+    file=filedialog.asksaveasfile(confirmoverwrite=True)
 
 
 reduce_size_button=Button(main,text="Reduce Size",command=lambda:reduce_size(),width=10,height=2,activebackground="#C6E2FF").place(relx=0.2,rely=0.4)
 increace_size_button=Button(main,text="Increase Size",command=lambda:increase_size(),width=10,height=2,activebackground="#C6E2FF").place(relx=0.6,rely=0.4)
 
-main.mainloop()
+# main.mainloop()
 
 class FileProcess:
 
@@ -62,3 +67,12 @@ class FileProcess:
         with open('close.jpg', 'wb') as f4:
             f4.write(imgbyte2)
 
+fp=FileProcess()
+data=fp.filetobin()
+
+print(len(data))
+sys.set_int_max_str_digits(965208)
+
+data=int(data)/99
+
+print(len(data))

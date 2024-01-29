@@ -1,7 +1,30 @@
-import requests
+import kivy
+import random
 
-Get_players = requests.get(f'http://157.254.166.75:30120/info.json', timeout=20)
+from kivy.app import App
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
 
-# Get_players = get(f'http://51.79.181.126:30129/players.json', timeout=5)
+red = [1,0,0,1]
+green = [0,1,0,1]
+blue =  [0,0,1,1]
+purple = [1,0,1,1]
 
-print(Get_players.content)
+class HBoxLayoutExample(App):
+    def build(self):
+        layout = BoxLayout(padding=10)
+        colors = [red, green, blue, purple]
+
+        for i in range(5):
+            btn = Button(text="Button #%s" % (i+1),
+                         background_color=random.choice(colors)
+                         )
+
+            layout.add_widget(btn)
+            btn.on_press()
+
+        return layout
+
+if __name__ == "__main__":
+    app = HBoxLayoutExample()
+    app.run()
